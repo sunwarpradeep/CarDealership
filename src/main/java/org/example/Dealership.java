@@ -35,7 +35,7 @@ public class Dealership {
 
     public void getAllVehicles() {}
 
-    public void addVehicle(vehicle) {}
+    public void addVehicle(Vehicle vehicle) {}
 
-    public void removeVehicle(vehicle) {}
+    public void removeVehicle(Vehicle vehicle) {}
 }
