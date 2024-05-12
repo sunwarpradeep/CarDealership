@@ -6,7 +6,6 @@ public class UserInterface {
         Dealership dealership = new Dealership();
 
         public UserInterface(Dealership dealership) {
-            this.dealership = dealership;
 
         }
 
