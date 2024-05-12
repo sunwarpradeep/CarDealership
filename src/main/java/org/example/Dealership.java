@@ -1,6 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 public class Dealership {
@@ -47,20 +49,48 @@ public class Dealership {
         this.vehicle = vehicle;
     }
 
-    public void getVehiclesByPrice(double min, double max) {
+    public List<Vehicle> getVehiclesByPrice(double min, double max) {
+        // needs user input to accept min and max price
+        return this.vehicle.stream()
+                .filter(v -> v.getPrice() >= min && v.getPrice() <= max)
+                .toList();
     }
 
-    public void getVehiclesByMakeModel(String make, String model) {}
+    public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
+        return this.vehicle.stream()
+                .filter(v -> v.getMake().equals(make) && v.getModel().equals(model))
+                .toList();
+    }
 
-    public void getVehiclesByYear(double min, double max) {}
+    public List<Vehicle> getVehiclesByYear(double min, double max) {
+        return this.vehicle.stream()
+                .filter(v -> v.getYear() >= min && v.getYear() <= max)
+                .toList();
+    }
 
-    public void getVehiclesByColor(String color) {}
+    public List<Vehicle> getVehiclesByColor(String color) {
+        return this.vehicle.stream()
+                .filter(v -> v.getColor().equals(color))
+                .toList();
+    }
 
-    public void getVehiclesByMileage(double min, double max) {}
+    public List<Vehicle> getVehiclesByMileage(double min, double max) {
+        return this.vehicle.stream()
+                .filter(v -> v.getOdometer() >= min && v.getOdometer() <= max)
+                .toList();
+    }
 
-    public void getVehiclesByType(String vehicleType) {}
+    public List<Vehicle> getVehiclesByType(String vehicleType) {
+        return this.vehicle.stream()
+                .filter(v -> v.getVehicleType().equals(vehicleType))
+                .toList();
+    }
 
-    public void getAllVehicles() {}
+    public List<Vehicle> getAllVehicles() {
+        return this.vehicle.stream()
+                .filter(v -> v != null)
+                .toList();
+    }
   
     public void addVehicle(ArrayList <Vehicle> vehicle) {}
 
