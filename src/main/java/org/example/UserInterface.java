@@ -5,8 +5,8 @@ import java.util.Scanner;
 public class UserInterface {
         Dealership dealership = new Dealership();
 
-        public UserInterface(Dealership dealership) {
-            this.dealership = dealership;
+        public UserInterface() { // removed parameters temporarily
+            // will fix if issues arise while adding multiple dealerships (MDC)
 
         }
 
