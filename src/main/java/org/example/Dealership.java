@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Vector;
 
 public class Dealership {
     private String name;
@@ -20,6 +21,12 @@ public class Dealership {
         return phone;
     }
 
+    public Dealership(String name, String address, String phone) {
+        this.name = name;
+        this.address = address;
+        this.phone = phone;
+    }
+
     public void getVehiclesByPrice(double min, double max) {
     }
 
@@ -34,8 +41,9 @@ public class Dealership {
     public void getVehiclesByType(String vehicleType) {}
 
     public void getAllVehicles() {}
+  
+    public void addVehicle(ArrayList <Vehicle> vehicle) {}
 
-    public void addVehicle(Vehicle vehicle) {}
-
-    public void removeVehicle(Vehicle vehicle) {}
+    public void removeVehicle(ArrayList <Vehicle> vehicle) {}
+  
 }
