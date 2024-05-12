@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-        Dealership dealership = new Dealership(); // needs params for name, address, and phone loaded from file
+        Dealership dealership = new Dealership("Test Dealership", "123 Main St", "555-1234"); // needs params for name, address, and phone loaded from file
 
+        private static final Scanner scanner = new Scanner(System.in);
 
         public UserInterface() { // removed parameters temporarily
             // will fix if issues arise while adding multiple dealerships (MDC)
@@ -19,7 +20,6 @@ public class UserInterface {
           //  this.dealership = myDealershipFileManager.getDealership();
         }
         public void display(){
-            Scanner scanner = new Scanner(System.in);
             //need to ask user something?
             String userCommand = scanner.next();
             boolean exit = false;
@@ -67,6 +67,16 @@ public class UserInterface {
                         NumberFormat.getCurrencyInstance().format(vehicle.getPrice()));
             }
         }
+    }
+
+    public static String getInput(String prompt, boolean allowEmpty) {
+        System.out.print(prompt);
+        String input = scanner.nextLine().trim();
+        if (allowEmpty || !input.isEmpty()) {
+            return input;
+        }
+        System.out.println("The input cannot be empty. Please enter a value.");
+        return getInput(prompt, allowEmpty);
     }
     }
 
