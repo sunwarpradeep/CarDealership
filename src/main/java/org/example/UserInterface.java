@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class UserInterface {
         Dealership dealership = new Dealership(); // needs params for name, address, and phone loaded from file
 
+
         public UserInterface() { // removed parameters temporarily
             // will fix if issues arise while adding multiple dealerships (MDC)
 
