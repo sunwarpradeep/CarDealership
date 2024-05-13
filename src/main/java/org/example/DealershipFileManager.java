@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DealershipFileManager {
@@ -45,7 +43,28 @@ public class DealershipFileManager {
     }
 
     //This method will overwrite the inventory.csv file with the current dealership information and inventory list
-    public void saveDealership(){
-        //for now no code
+    public void saveDealership(Dealership dealership) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(INVENTORY_FILE, false))) {
+            //need to write to csv the title line
+
+            //writes the inventory of vehicles to csv
+            for (Vehicle vehicle : dealership.getAllVehicles()) {
+                String inventoryToFile = String.format("%d|%d|%s|%s|%s|%s|%d|%.2f",
+                        vehicle.getVin(),
+                        vehicle.getYear(),
+                        vehicle.getMake(),
+                        vehicle.getModel(),
+                        vehicle.getVehicleType(),
+                        vehicle.getColor(),
+                        vehicle.getOdometer(),
+                        vehicle.getPrice());
+                writer.newLine();
+                writer.write(inventoryToFile);
+                //optional message
+                System.out.println("Printed successfully!");
+            }
+        } catch (IOException ex) {
+            System.out.println("Couldn't open the file");
+        }
     }
 }
