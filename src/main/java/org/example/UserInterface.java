@@ -29,7 +29,7 @@ public class UserInterface {
                 9) Remove a vehicle
                 99) Quit""");
 
-        String userInput = scanner.nextLine();
+        String userInput = scanner.nextLine().toUpperCase().trim();
 
         switch (userInput) {
             case "1":
@@ -42,20 +42,16 @@ public class UserInterface {
                 processGetByYearRequest();
                 break;
             case "4":
-                System.out.println("To find vehicles by color, please enter the color:");
                 processGetByColorRequest();
                 break;
             case "5":
-                System.out.println("To find vehicles by mileage, please enter min and max mileage:");
                 processGetByMileageRequest();
                 break;
             case "6":
-                System.out.println("To search vehicle by type, enter vehicle type:");
                 processGetByVehicleTypeRequest();
                 break;
             case "7":
                 processGetAllVehiclesRequest();
-                System.out.println("Here is a list of all vehicles:");
                 break;
             case "8":
                 processAddVehicleRequest();
@@ -75,51 +71,50 @@ public class UserInterface {
     public void processGetByPriceRequest() {
         System.out.println("To find vehicles by price, enter a minimum and maximum price (in digits, ex: 2000).");
         System.out.println("Enter minimum price:");
-        double min = scanner.nextDouble();
+        double min = Double.parseDouble(scanner.nextLine().trim());
         System.out.println("Enter maximum price:");
-        double max = scanner.nextDouble();
-        List<Vehicle> vehicles = dealership.getVehiclesByPrice(min, max);
-        displayVehicles(vehicles);
+        double max = Double.parseDouble(scanner.nextLine().trim());
+        displayVehicles(dealership.getVehiclesByPrice(min, max));
     }
 
     public void processGetByMakeModelRequest() {
         System.out.println("To find vehicles, please enter make and model (ex: Ford):");
         System.out.println("Enter the vehicle manufacturer's name:");
-        String make = scanner.nextLine();
+        String make = scanner.nextLine().toUpperCase().trim();
         System.out.println("Enter the vehicle model name:");
-        String model = scanner.nextLine();
+        String model = scanner.nextLine().toUpperCase().trim();
         displayVehicles(dealership.getVehiclesByMakeModel(make, model));
     }
 
     public void processGetByYearRequest() {
         System.out.println("To find vehicles by year range, enter the earliest and latest year (in digits, ex: 2000):");
         System.out.println("Enter the earliest year:");
-        int min = scanner.nextInt();
+        int min = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("Enter the latest year:");
-        int max = scanner.nextInt();
+        int max = Integer.parseInt(scanner.nextLine().trim());
         displayVehicles(dealership.getVehiclesByYear(min, max));
     }
 
     public void processGetByColorRequest() {
         System.out.println("To find vehicles by color, please enter the color (ex: red):");
         System.out.println("Enter the desired color:");
-        String color = scanner.nextLine();
+        String color = scanner.nextLine().toUpperCase().trim();
         displayVehicles(dealership.getVehiclesByColor(color));
     }
 
     public void processGetByMileageRequest() {
         System.out.println("To find vehicles by mileage, please enter min and max mileage (in digits, ex: 2000):");
         System.out.println("Enter the minimum mileage:");
-        int min = scanner.nextInt();
+        int min = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("Enter the maximum mileage:");
-        int max = scanner.nextInt();
+        int max = Integer.parseInt(scanner.nextLine().trim());
         displayVehicles(dealership.getVehiclesByMileage(min, max));
     }
 
     public void processGetByVehicleTypeRequest() {
         System.out.println("To search vehicle by type, enter vehicle type (ex: truck):");
         System.out.println("Enter the vehicle type:");
-        String type = scanner.nextLine();
+        String type = scanner.nextLine().toUpperCase().trim();
         displayVehicles(dealership.getVehiclesByType(type));
     }
 
@@ -131,25 +126,21 @@ public class UserInterface {
     public void processAddVehicleRequest() {
         System.out.println("To add a vehicle, please enter the following information:");
         System.out.println("Enter the vehicle's VIN:");
-        int vin = scanner.nextInt();
-        scanner.nextLine();
+        int vin = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("Enter the vehicle's year:");
-        int year = scanner.nextInt();
-        scanner.nextLine();
+        int year = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("Enter the vehicle's make:");
-        String make = scanner.nextLine();
+        String make = scanner.nextLine().toUpperCase().trim();
         System.out.println("Enter the vehicle's model:");
-        String model = scanner.nextLine();
+        String model = scanner.nextLine().toUpperCase().trim();
         System.out.println("Enter the vehicle's type:");
-        String type = scanner.nextLine();
+        String type = scanner.nextLine().toUpperCase().trim();
         System.out.println("Enter the vehicle's color:");
-        String color = scanner.nextLine();
+        String color = scanner.nextLine().toUpperCase().trim();
         System.out.println("Enter the vehicle's odometer reading:");
-        int odometer = scanner.nextInt();
-        scanner.nextLine();
+        int odometer = Integer.parseInt(scanner.nextLine().trim());
         System.out.println("Enter the vehicle's price:");
-        double price = scanner.nextDouble();
-        scanner.nextLine();
+        double price = Double.parseDouble(scanner.nextLine().trim());
         Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         dealership.addVehicle(vehicle);
         fileManager.saveDealership(dealership);
@@ -157,8 +148,8 @@ public class UserInterface {
         System.out.println("Here is a list of all vehicles:");
         displayVehicles(dealership.getAllVehicles());
         System.out.println("Would you like to add another vehicle? (y/n)");
-        String response = scanner.nextLine();
-        if (response.equalsIgnoreCase("y")) {
+        String response = scanner.nextLine().toUpperCase().trim();
+        if (response.equalsIgnoreCase("Y")) {
             processAddVehicleRequest();
         } else { // user does not want to add another vehicle
             return;
@@ -166,7 +157,19 @@ public class UserInterface {
     }
 
     public void processRemoveVehicleRequest() {
-
+        processGetAllVehiclesRequest();
+        System.out.println("To remove a vehicle, please enter the vehicle's VIN:");
+        int vin = Integer.parseInt(scanner.nextLine().trim());
+        scanner.nextLine();
+        Vehicle vehicle = dealership.getVehiclesByVin(vin).get(0);
+        if (vehicle == null) {
+            System.out.println("Vehicle not found.");
+        } else {
+            dealership.removeVehicle(vehicle);
+            fileManager.saveDealership(dealership);
+            System.out.println("Vehicle removed and saved successfully.");
+            processGetAllVehiclesRequest();
+        }
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {
@@ -186,16 +189,6 @@ public class UserInterface {
                         NumberFormat.getCurrencyInstance().format(vehicle.getPrice()));
             }
         }
-    }
-
-    public static String getInput(String prompt, boolean allowEmpty) {
-        System.out.print(prompt);
-        String input = scanner.nextLine().trim();
-        if (allowEmpty || !input.isEmpty()) {
-            return input;
-        }
-        System.out.println("The input cannot be empty. Please enter a value.");
-        return getInput(prompt, allowEmpty);
     }
 
 }
