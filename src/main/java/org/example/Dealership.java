@@ -57,7 +57,7 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         return this.vehicle.stream()
-                .filter(v -> v.getMake().contains(make) && v.getModel().contains(model))
+                .filter(v -> v.getMake().toUpperCase().contains(make) && v.getModel().toUpperCase().contains(model))
                 .toList();
     }
 
@@ -69,7 +69,7 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByColor(String color) {
         return this.vehicle.stream()
-                .filter(v -> v.getColor().contains(color))
+                .filter(v -> v.getColor().toUpperCase().contains(color))
                 .toList();
     }
 
@@ -81,7 +81,12 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByType(String vehicleType) {
         return this.vehicle.stream()
-                .filter(v -> v.getVehicleType().contains(vehicleType))
+                .filter(v -> v.getVehicleType().toUpperCase().contains(vehicleType))
+                .toList();
+    }
+    public List<Vehicle> getVehiclesByVin(int vin) {
+        return this.vehicle.stream()
+                .filter(v -> v.getVin() == vin)
                 .toList();
     }
 
