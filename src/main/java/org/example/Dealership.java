@@ -14,6 +14,7 @@ public class Dealership {
         this.name = name;
         this.address = address;
         this.phone = phone;
+        this.vehicle = new ArrayList<>();
     }
 
     public String getName() {
