@@ -10,8 +10,9 @@ public class UserInterface {
     private static final Scanner scanner = new Scanner(System.in);
 
     public void init () {
-       // DealershipFileManager myDealershipFileManager = new DealershipFileManager();
-      //  this.dealership = myDealershipFileManager.getDealership();
+      DealershipFileManager myDealershipFileManager = new DealershipFileManager();
+      this.dealership = myDealershipFileManager.getDealership();
+
     }
     public void display(){
         System.out.println("""
@@ -32,15 +33,12 @@ public class UserInterface {
 
         switch (userInput) {
             case "1":
-                System.out.println("To find vehicles by price, enter a min and max price:");
                 processGetByPriceRequest();
                 break;
             case "2":
-                System.out.println("To find vehicles, please enter make and model:");
                 processGetByMakeModelRequest();
                 break;
             case "3":
-                System.out.println("To find vehicles by year, enter the required year:");
                 processGetByYearRequest();
                 break;
             case "4":
@@ -75,30 +73,58 @@ public class UserInterface {
     }
 
     public void processGetByPriceRequest() {
-        //displayVehicles(dealership.getVehiclesByPrice());
+        System.out.println("To find vehicles by price, enter a minimum and maximum price (in digits, ex: 2000).");
+        System.out.println("Enter minimum price:");
+        double min = scanner.nextDouble();
+        System.out.println("Enter maximum price:");
+        double max = scanner.nextDouble();
+        List<Vehicle> vehicles = dealership.getVehiclesByPrice(min, max);
+        displayVehicles(vehicles);
     }
 
     public void processGetByMakeModelRequest() {
-        //displayVehicles(dealership.getVehiclesByMakeModel());
+        System.out.println("To find vehicles, please enter make and model (ex: Ford):");
+        System.out.println("Enter the vehicle manufacturer's name:");
+        String make = scanner.nextLine();
+        System.out.println("Enter the vehicle model name:");
+        String model = scanner.nextLine();
+        displayVehicles(dealership.getVehiclesByMakeModel(make, model));
     }
 
     public void processGetByYearRequest() {
-        //displayVehicles(dealership.getVehiclesByYear());
+        System.out.println("To find vehicles by year range, enter the earliest and latest year (in digits, ex: 2000):");
+        System.out.println("Enter the earliest year:");
+        int min = scanner.nextInt();
+        System.out.println("Enter the latest year:");
+        int max = scanner.nextInt();
+        displayVehicles(dealership.getVehiclesByYear(min, max));
     }
 
     public void processGetByColorRequest() {
-        //displayVehicles(dealership.getVehiclesByColor());
+        System.out.println("To find vehicles by color, please enter the color (ex: red):");
+        System.out.println("Enter the desired color:");
+        String color = scanner.nextLine();
+        displayVehicles(dealership.getVehiclesByColor(color));
     }
 
     public void processGetByMileageRequest() {
-        //displayVehicles(dealership.getVehiclesByMileage());
+        System.out.println("To find vehicles by mileage, please enter min and max mileage (in digits, ex: 2000):");
+        System.out.println("Enter the minimum mileage:");
+        int min = scanner.nextInt();
+        System.out.println("Enter the maximum mileage:");
+        int max = scanner.nextInt();
+        displayVehicles(dealership.getVehiclesByMileage(min, max));
     }
 
     public void processGetByVehicleTypeRequest() {
-        //displayVehicles(dealership.getVehiclesByType());
+        System.out.println("To search vehicle by type, enter vehicle type (ex: truck):");
+        System.out.println("Enter the vehicle type:");
+        String type = scanner.nextLine();
+        displayVehicles(dealership.getVehiclesByType(type));
     }
 
     public void processGetAllVehiclesRequest() {
+        System.out.println("Here is a list of all vehicles:");
         displayVehicles(dealership.getAllVehicles());
     }
 
@@ -116,7 +142,7 @@ public class UserInterface {
         } else {
             System.out.println("VIN|YEAR|MAKE|MODEL|TYPE|COLOR|MILEAGE|PRICE");
             for (Vehicle vehicle : vehicles) {
-                System.out.printf("%d|%d|%s|%s|%s|%s|%d|%f\n",
+                System.out.printf("%d|%d|%s|%s|%s|%s|%d|%s\n",
                         vehicle.getVin(),
                         vehicle.getYear(),
                         vehicle.getMake(),
