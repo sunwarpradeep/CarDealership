@@ -87,7 +87,7 @@ public class Vehicle {
     }
 
     public String toString() {
-        return String.format ("Vehicle { vin=%d, year=%d, make='%s', model='%s', vehicleType='%s', odometer=%d, price=%.2f}",
+        return String.format ("Vehicle { vin=%d, year=%d, make='%s', model='%s', vehicleType='%s', color = %s, odometer=%d, price=%.2f}",
                 vin, year, make, model, vehicleType, color, odometer, price);
 
     }

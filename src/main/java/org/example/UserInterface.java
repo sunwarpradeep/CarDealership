@@ -5,15 +5,48 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    Dealership dealership = new Dealership("", "", "");
-    DealershipFileManager fileManager = new DealershipFileManager();
+    private Dealership dealership;
+    private DealershipFileManager fileManager;
+
+    public UserInterface() {
+        fileManager = new DealershipFileManager();
+        dealership = fileManager.getDealership();
+    }
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public void init () {
-      this.dealership = fileManager.getDealership();
-
+        //this.dealership = fileManager.getDealership();
+        System.out.println("""
+                Which Dealership would you like to view?
+                1)D & B Used Cars
+                2)Raymundo's Exotic Cars
+                3)Carl's Best Beaters Car
+                Please enter one of the choices above!
+                """);
+        String input = scanner.nextLine().trim();
+        switch (input){
+            case "1":
+                fileManager.setInputToFile("inventory.csv");
+                dealership = fileManager.getDealership();
+                System.out.println(fileManager.getInputToFile());
+//                fileManager.getDealership().getAllVehicles();
+                break;
+            case "2":
+                fileManager.setInputToFile("inventory2.csv");
+                dealership = fileManager.getDealership();
+                System.out.println(fileManager.getInputToFile());
+                break;
+            case "3":
+                fileManager.setInputToFile("inventory3.csv");
+                dealership = fileManager.getDealership();
+                System.out.println(fileManager.getInputToFile());
+                break;
+            default:
+                break;
+        }
     }
+
     public void display(){
         System.out.println("""
                 Welcome to the car dealership!
@@ -173,7 +206,7 @@ public class UserInterface {
     }
 
     private void displayVehicles(List<Vehicle> vehicles) {
-        if (vehicles.isEmpty()) {
+        if (vehicles == null || vehicles.isEmpty())  {
             System.out.println("No matching vehicles were found.");
         } else {
             System.out.println("VIN|YEAR|MAKE|MODEL|TYPE|COLOR|MILEAGE|PRICE");
