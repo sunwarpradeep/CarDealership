@@ -4,11 +4,26 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class DealershipFileManager {
+
+    private String inputToFile;
+
+    public String getInputToFile() {
+        return inputToFile;
+    }
+
+    public void setInputToFile(String inputToFile) {
+        this.inputToFile = inputToFile;
+    }
+
     private static final String INVENTORY_FILE = "src/main/resources/inventory.csv";
     //This method should load and read the inventory.csv
     public Dealership getDealership(){
         Dealership dealership = null;
-        try(BufferedReader reader = new BufferedReader(new FileReader(INVENTORY_FILE))){
+
+        //Get user input to choose which inventory.csv to view
+
+        String inventoryFilePath = String.format(INVENTORY_FILE );
+        try(BufferedReader reader = new BufferedReader(new FileReader(inventoryFilePath))){
 
             //deserialize the first line to import the information into Dealership
             String line = reader.readLine();//only deserialize the first line
