@@ -63,7 +63,7 @@ public class DealershipFileManager {
                 writer.newLine();
                 writer.write(inventoryToFile);
                 //optional message
-                System.out.println("Printed successfully!");
+                //System.out.println("Printed successfully!");
             }
         } catch (IOException ex) {
             System.out.println("Couldn't open the file");
