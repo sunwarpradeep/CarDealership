@@ -3,7 +3,6 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Vector;
 
 public class Dealership {
     private String name;
@@ -58,11 +57,11 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByMakeModel(String make, String model) {
         return this.vehicle.stream()
-                .filter(v -> v.getMake().equals(make) && v.getModel().equals(model))
+                .filter(v -> v.getMake().contains(make) && v.getModel().contains(model))
                 .toList();
     }
 
-    public List<Vehicle> getVehiclesByYear(double min, double max) {
+    public List<Vehicle> getVehiclesByYear(int min, int max) {
         return this.vehicle.stream()
                 .filter(v -> v.getYear() >= min && v.getYear() <= max)
                 .toList();
@@ -70,11 +69,11 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByColor(String color) {
         return this.vehicle.stream()
-                .filter(v -> v.getColor().equals(color))
+                .filter(v -> v.getColor().contains(color))
                 .toList();
     }
 
-    public List<Vehicle> getVehiclesByMileage(double min, double max) {
+    public List<Vehicle> getVehiclesByMileage(int min, int max) {
         return this.vehicle.stream()
                 .filter(v -> v.getOdometer() >= min && v.getOdometer() <= max)
                 .toList();
@@ -82,13 +81,13 @@ public class Dealership {
 
     public List<Vehicle> getVehiclesByType(String vehicleType) {
         return this.vehicle.stream()
-                .filter(v -> v.getVehicleType().equals(vehicleType))
+                .filter(v -> v.getVehicleType().contains(vehicleType))
                 .toList();
     }
 
     public List<Vehicle> getAllVehicles() {
         return this.vehicle.stream()
-                .filter(v -> v != null)
+                .filter(Objects::nonNull)
                 .toList();
     }
   
