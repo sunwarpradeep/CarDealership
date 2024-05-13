@@ -160,6 +160,8 @@ public class UserInterface {
         String response = scanner.nextLine();
         if (response.equalsIgnoreCase("y")) {
             processAddVehicleRequest();
+        } else { // user does not want to add another vehicle
+            return;
         }
     }
 

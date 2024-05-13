@@ -95,6 +95,8 @@ public class Dealership {
         this.vehicle.add(vehicle);
     }
 
-    public void removeVehicle(ArrayList <Vehicle> vehicle) {}
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicle.remove(vehicle);
+    }
   
 }

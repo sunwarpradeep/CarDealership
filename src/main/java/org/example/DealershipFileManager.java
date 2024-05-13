@@ -46,6 +46,8 @@ public class DealershipFileManager {
     public void saveDealership(Dealership dealership) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(INVENTORY_FILE, false))) {
             //need to write to csv the title line
+            String titleToFile = String.format("%s|%s|%s", dealership.getName(), dealership.getAddress(), dealership.getPhone());
+            writer.write(titleToFile);
 
             //writes the inventory of vehicles to csv
             for (Vehicle vehicle : dealership.getAllVehicles()) {
