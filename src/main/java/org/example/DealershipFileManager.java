@@ -48,7 +48,6 @@ public class DealershipFileManager {
             //need to write to csv the title line
             String titleToFile = String.format("%s|%s|%s", dealership.getName(), dealership.getAddress(), dealership.getPhone());
             writer.write(titleToFile);
-            writer.newLine();
 
             //writes the inventory of vehicles to csv
             for (Vehicle vehicle : dealership.getAllVehicles()) {

@@ -92,9 +92,11 @@ public class Dealership {
     }
   
     public void addVehicle(Vehicle vehicle) {
-
+        this.vehicle.add(vehicle);
     }
 
-    public void removeVehicle(Vehicle vehicle) {}
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicle.remove(vehicle);
+    }
   
 }
