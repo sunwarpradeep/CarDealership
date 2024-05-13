@@ -11,7 +11,58 @@ public class UserInterface {
 
         public UserInterface() { // removed parameters temporarily
             // will fix if issues arise while adding multiple dealerships (MDC)
+            System.out.println("""
+                    Welcome to the car dealership!
+                              Would you like to:
+                              1) Find vehicles by price range
+                              2) Find vehicles by make/model
+                              3) Find vehicles by year range
+                              4) Find vehicles by color
+                              5) Find vehicles by mileage range
+                              6) Find vehicles by type
+                              7) List all vehicles
+                              8) Add a vehicle
+                              9) Remove a vehicle
+                              99) Quit
+                           """);
 
+            String userInput = scanner.nextLine();
+
+            switch (userInput) {
+                case "1":
+                    processGetByPriceRequest();
+                    break;
+                case "2":
+                    processGetByMakeModelRequest();
+                    break;
+                case "3":
+                    processGetByYearRequest();
+                    break;
+                case "4":
+                    processGetByColorRequest();
+                    break;
+                case "5":
+                    processGetByMileageRequest();
+                    break;
+                case "6":
+                    processGetByVehicleTypeRequest();
+                    break;
+                case "7":
+                    processGetAllVehiclesRequest();
+                    break;
+                case "8":
+                    processAddVehicleRequest();
+                    break;
+                case "9":
+                    processRemoveVehicleRequest();
+                    break;
+                case "99":
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Incorrect Input");
+
+            }
         }
 
 
@@ -40,15 +91,31 @@ public class UserInterface {
                 }
             }
         }
-        public void processGetByPriceRequest() {}
-        public void processGetByMakeModelRequest() {}
-        public void processGetByYearRequest() {}
-        public void processGetByColorRequest() {}
-        public void processGetByMileageRequest() {}
-        public void processGetByVehicleTypeRequest() {}
-        public void processGetAllVehiclesRequest() {}
-        public void processAddVehicleRequest() {}
-        public void processRemoveVehicleRequest() {}
+            public void processGetByPriceRequest() {
+                //displayVehicles(dealership.getVehiclesByPrice());
+            }
+            public void processGetByMakeModelRequest() {
+                //displayVehicles(dealership.getVehiclesByMakeModel());
+            }
+            public void processGetByYearRequest() {
+                //displayVehicles(dealership.getVehiclesByYear());
+            }
+            public void processGetByColorRequest() {
+                //displayVehicles(dealership.getVehiclesByColor());
+            }
+            public void processGetByMileageRequest() {
+                //displayVehicles(dealership.getVehiclesByMileage());
+            }
+            public void processGetByVehicleTypeRequest() {
+                //displayVehicles(dealership.getVehiclesByType());
+            }
+            public void processGetAllVehiclesRequest() {
+                displayVehicles(dealership.getAllVehicles());
+            }
+            public void processAddVehicleRequest() {
+
+            }
+            public void processRemoveVehicleRequest() {}
 
     private void displayVehicles(List<Vehicle> vehicles) {
         if (vehicles.isEmpty()) {
