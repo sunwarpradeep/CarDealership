@@ -5,13 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
-    Dealership dealership = new Dealership("Test Dealership", "123 Main St", "555-1234"); // needs params for name, address, and phone loaded from file
+    Dealership dealership = new Dealership("", "", "");
+    DealershipFileManager fileManager = new DealershipFileManager();
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public void init () {
-      DealershipFileManager myDealershipFileManager = new DealershipFileManager();
-      this.dealership = myDealershipFileManager.getDealership();
+      this.dealership = fileManager.getDealership();
 
     }
     public void display(){
@@ -129,7 +129,38 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest() {
-
+        System.out.println("To add a vehicle, please enter the following information:");
+        System.out.println("Enter the vehicle's VIN:");
+        int vin = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the vehicle's year:");
+        int year = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the vehicle's make:");
+        String make = scanner.nextLine();
+        System.out.println("Enter the vehicle's model:");
+        String model = scanner.nextLine();
+        System.out.println("Enter the vehicle's type:");
+        String type = scanner.nextLine();
+        System.out.println("Enter the vehicle's color:");
+        String color = scanner.nextLine();
+        System.out.println("Enter the vehicle's odometer reading:");
+        int odometer = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("Enter the vehicle's price:");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+        Vehicle vehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
+        dealership.addVehicle(vehicle);
+        fileManager.saveDealership(dealership);
+        System.out.println("Vehicle added and saved successfully.");
+        System.out.println("Here is a list of all vehicles:");
+        displayVehicles(dealership.getAllVehicles());
+        System.out.println("Would you like to add another vehicle? (y/n)");
+        String response = scanner.nextLine();
+        if (response.equalsIgnoreCase("y")) {
+            processAddVehicleRequest();
+        }
     }
 
     public void processRemoveVehicleRequest() {
@@ -164,5 +195,5 @@ public class UserInterface {
         System.out.println("The input cannot be empty. Please enter a value.");
         return getInput(prompt, allowEmpty);
     }
-}
 
+}

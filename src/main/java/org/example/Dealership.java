@@ -91,8 +91,8 @@ public class Dealership {
                 .toList();
     }
   
-    public void addVehicle(ArrayList <Vehicle> vehicle) {
-
+    public void addVehicle(Vehicle vehicle) {
+        this.vehicle.add(vehicle);
     }
 
     public void removeVehicle(ArrayList <Vehicle> vehicle) {}
