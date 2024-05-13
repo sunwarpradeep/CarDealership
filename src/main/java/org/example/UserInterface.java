@@ -129,6 +129,7 @@ public class UserInterface {
     }
 
     public void processAddVehicleRequest() {
+        System.out.println("Enter the ");
 
     }
 
